@@ -31,6 +31,8 @@ function preload(){
    invaders3 = loadImage ("img/invaders3.jpg")
    enter = loadImage("img/enter.jpg")
    gameOver = loadImage("img/gameOver.jpg")
+   shoot = loadSound("img/shoot.wav")
+   background = loadSound("img/music.mp3")
 }
 
 function setup(){
@@ -41,13 +43,13 @@ function setup(){
    rect(0,785,800,10)
    player = loadImage("img/player.jpg")
    textScreen = loadImage("img/logo.png")
-
+   background.play();
 }
 
 function draw(){
    if (gamemode ==0){
-       image(textScreen, 0,0);
-       image(enter,150,500,500,100)
+        image(textScreen, 0,0);
+        image(enter,150,500,500,100)
    }else if (gamemode ==1){
         fill(0)
         rect(0,0,800,800)
@@ -171,7 +173,7 @@ function draw(){
             }
         }
         if(endGame == 660){
-            reset()
+            reset();
         }else if (y >= endGame){
             gamemode = 3
         }
@@ -194,7 +196,8 @@ function keyPressed(){
    }else if (gamemode == 1){
        if (key == " " && !bullet[0]){
            bullet[0] = true
-           bulletPos = xPos                          
+           bulletPos = xPos  
+           shoot.play();                        
        } 
     }else if (gamemode == 3){
         if (keyCode == 27){
@@ -218,7 +221,8 @@ function reset(){
     row5 = 0
     enemies = true
     bulletPos = xPos   
-    yPos=730                       
+    yPos=730      
+    background.play();                 
     for(let i =0; i<arr.length; i++){
         arr[i] = [true, true, true, true, true]
     }
